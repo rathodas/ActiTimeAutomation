@@ -35,11 +35,7 @@ public class ActiTimeHomePage extends GenericMethods{
 	public void verifyTitle(WebDriver driver,String product, String lob,String testScenarioID,String regressionScenarioID,XSSFWorkbook workbook,Connection conn,  String stepGroup,CustomAssert customAssert) throws Exception {
 		Properties dataRow = ExcelRead.readRowDataInProperties(workbook, sheetName, testScenarioID, stepGroup);
 		
-		String actualTitle = driver.getTitle();
-		
-		String expectedTitle = "actiTIME - Enter Time-Track";
-		
-		customAssert.verifyAssert(expectedTitle, dataRow.getProperty("Title"), "Verify Title");
+		customAssert.verifyAssert(dataRow.getProperty("Title"),driver.getTitle(), "Verify Title");
 		
 	}
 	
