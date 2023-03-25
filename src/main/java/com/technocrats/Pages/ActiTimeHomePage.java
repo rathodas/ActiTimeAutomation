@@ -1,6 +1,7 @@
 package com.technocrats.Pages;
 
 import java.time.Duration;
+import java.util.Properties;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.testng.Reporter;
 import com.codoid.products.fillo.Connection;
 import com.technocrats.core.CustomAssert;
 import com.technocrats.core.FrameworkServices;
+import com.technocrats.utils.ExcelRead;
 import com.technocrats.utils.GenericMethods;
 
 public class ActiTimeHomePage extends GenericMethods{
@@ -23,6 +25,7 @@ public class ActiTimeHomePage extends GenericMethods{
 		wait=new WebDriverWait(driver, Duration.ofSeconds(20));
 	}
 	
+	String sheetName="ActiTimeHomePage"; 
 	public void navigateToActitimeURL(WebDriver driver,String product, String lob,String testScenarioID,String regressionScenarioID,XSSFWorkbook workbook,Connection conn,  String stepGroup,CustomAssert customAssert) throws Exception {
 		String url = FrameworkServices.getConfigProperties().getProperty("URL");
 		driver.navigate().to(url);
@@ -30,12 +33,13 @@ public class ActiTimeHomePage extends GenericMethods{
 	}
 	
 	public void verifyTitle(WebDriver driver,String product, String lob,String testScenarioID,String regressionScenarioID,XSSFWorkbook workbook,Connection conn,  String stepGroup,CustomAssert customAssert) throws Exception {
-	
+		Properties dataRow = ExcelRead.readRowDataInProperties(workbook, sheetName, testScenarioID, stepGroup);
+		
 		String actualTitle = driver.getTitle();
-		System.out.println(actualTitle);
+		
 		String expectedTitle = "actiTIME - Enter Time-Track";
 		
-		customAssert.verifyAssert(expectedTitle, actualTitle, "Verify Title");
+		customAssert.verifyAssert(expectedTitle, dataRow.getProperty("Title"), "Verify Title");
 		
 	}
 	
