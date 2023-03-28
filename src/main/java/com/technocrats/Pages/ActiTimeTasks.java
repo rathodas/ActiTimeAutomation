@@ -22,6 +22,19 @@ public class ActiTimeTasks extends ActiTimeHomePage{
 	
 	@FindBy(id = "ext-comp-1016")
 	private WebElement createTaskLink;
+	
+	//Anil added 28/03/2023
+	@FindBy(name = "customerId")
+	private WebElement Customer;
+
+	@FindBy(name = "projectId")
+	private WebElement Project;
+	
+	@FindBy(name = "task[0].name")
+	private WebElement firstTaskName;
+	
+	@FindBy(xpath = "//*[@id='container']/form[1]/table/tbody/tr/td/table/tbody/tr[5]/td/table/tbody/tr/td/input[1]")
+	private WebElement createTaskBtn;
 
 	String sheetName="ActiTimeTasks"; 
 	WebDriverWait wait;
@@ -42,6 +55,11 @@ public class ActiTimeTasks extends ActiTimeHomePage{
 		click(driver, createTaskLink, "Create Task");
 		Thread.sleep(WaitTime.medium);
 		
+		selectFromDropdownByVisibleText(driver, Customer, dataRow.getProperty("Customer"), "Customer");
+		selectFromDropdownByVisibleText(driver, Project, dataRow.getProperty("Project"), "Project");
+		clearAndSenKeys(driver, firstTaskName, dataRow.getProperty("FirstTaskName"), "First Task Name ");
+		click(driver, createTaskBtn, "Create Tasks");
+		Thread.sleep(WaitTime.medium);
 	}
 
 	
