@@ -1,6 +1,8 @@
 package com.technocrats.Pages;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,8 +13,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.codoid.products.fillo.Connection;
+import com.technocrats.TestRunner.TestEngine;
 import com.technocrats.core.CustomAssert;
+import com.technocrats.core.FrameworkServices;
 import com.technocrats.utils.ExcelRead;
+import com.technocrats.utils.FrameworkUtils;
 import com.technocrats.utils.WaitTime;
 
 public class ActiTimeTasks extends ActiTimeHomePage{
@@ -47,18 +52,24 @@ public class ActiTimeTasks extends ActiTimeHomePage{
 	public void createTask(WebDriver driver,String product, String lob,String testScenarioID,String regressionScenarioID,XSSFWorkbook workbook,Connection conn,  String stepGroup,CustomAssert customAssert) throws Exception {
 
 		Properties dataRow = ExcelRead.readRowDataInProperties(workbook, sheetName, testScenarioID, stepGroup);
-
+		FrameworkUtils.captureScreenShot(driver, TestEngine.excutionFolder+FrameworkServices.configProp.getProperty("ScreenShotFolder"), new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(new Date()) );
+		Thread.sleep(WaitTime.low);
 		click(driver, taskTab, "Tasks");
 		
 		Thread.sleep(WaitTime.medium);
 		
 		click(driver, createTaskLink, "Create Task");
 		Thread.sleep(WaitTime.medium);
-		
+		FrameworkUtils.captureScreenShot(driver, TestEngine.excutionFolder+FrameworkServices.configProp.getProperty("ScreenShotFolder"), new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(new Date()) );
+		Thread.sleep(WaitTime.low);
 		selectFromDropdownByVisibleText(driver, Customer, dataRow.getProperty("Customer"), "Customer");
 		selectFromDropdownByVisibleText(driver, Project, dataRow.getProperty("Project"), "Project");
 		clearAndSenKeys(driver, firstTaskName, dataRow.getProperty("FirstTaskName"), "First Task Name ");
 		click(driver, createTaskBtn, "Create Tasks");
+		
+		FrameworkUtils.captureScreenShot(driver, TestEngine.excutionFolder+FrameworkServices.configProp.getProperty("ScreenShotFolder"), new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(new Date()) );
+		Thread.sleep(WaitTime.low);
+		
 		Thread.sleep(WaitTime.medium);
 	}
 

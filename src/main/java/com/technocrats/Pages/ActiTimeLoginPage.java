@@ -1,6 +1,8 @@
 package com.technocrats.Pages;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -14,8 +16,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import com.codoid.products.fillo.Connection;
+import com.technocrats.TestRunner.TestEngine;
 import com.technocrats.core.CustomAssert;
+import com.technocrats.core.FrameworkServices;
 import com.technocrats.utils.ExcelRead;
+import com.technocrats.utils.FrameworkUtils;
 import com.technocrats.utils.GenericMethods;
 import com.technocrats.utils.WaitTime;
 
@@ -46,8 +51,9 @@ public class ActiTimeLoginPage extends GenericMethods{
 
 		clearAndSenKeys(driver, userName, dataRow.getProperty("UserName"), "User Name");
 		clearAndSenKeys(driver, password, dataRow.getProperty("Password"), "Password");
+		FrameworkUtils.captureScreenShot(driver, TestEngine.excutionFolder+FrameworkServices.configProp.getProperty("ScreenShotFolder"), new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(new Date()) );
 		click(driver, loginButton, "Login");
-		
+		FrameworkUtils.captureScreenShot(driver, TestEngine.excutionFolder+FrameworkServices.configProp.getProperty("ScreenShotFolder"), new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(new Date()) );
 		Thread.sleep(WaitTime.low);
 	}
 	

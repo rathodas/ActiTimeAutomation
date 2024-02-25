@@ -20,7 +20,7 @@ public class CustomAssert extends GenericMethods {
 		this.driver=driver;
 	}
 	public  int counter=1;
-	public void verifyAssert(String expected,String actual, String message) throws IOException {
+	public void verifyAssert(String expected,String actual, String message) throws Exception {
 		try {
 			Assert.assertEquals(expected, actual);
 			Reporter.log("<B><Font color=\"DarkOrange\">"+counter+".   "+message+"       => PASSED</Font></B>");
@@ -36,7 +36,7 @@ public class CustomAssert extends GenericMethods {
 			counter++;
 		}
 	}
-	public void verifyAssert(Boolean expected, Boolean actual, String message) throws IOException {
+	public void verifyAssert(Boolean expected, Boolean actual, String message) throws Exception {
 		try {
 			Assert.assertEquals(expected, actual);
 			Reporter.log("<B><Font color=\"DarkOrange\">"+counter+".   "+message+"       => PASSED</Font></B>");

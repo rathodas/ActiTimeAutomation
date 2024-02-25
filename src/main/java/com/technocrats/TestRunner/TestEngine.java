@@ -26,7 +26,7 @@ public class TestEngine {
 		try {
 			
 			FrameworkServices frameworkServices=new FrameworkServices();
-		
+			process=Runtime.getRuntime().exec("cmd /c Grid_chrome.bat",null, new File(System.getProperty("user.dir")+FrameworkServices.configProp.getProperty("GridPath")));
 			TestNG testNG=new TestNG();
 			java.util.Date date=new java.util.Date();
 			SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MMM-yyyy__hh-mm-ss");
@@ -43,7 +43,9 @@ public class TestEngine {
 			e.printStackTrace();
 		}
 
-		finally{	
+		finally{
+			Runtime rt=Runtime.getRuntime();
+			rt.exec("taskkill /f /im cmd.exe") ;	
 			System.gc();
 			System.out.println("GC Called");
 		}
